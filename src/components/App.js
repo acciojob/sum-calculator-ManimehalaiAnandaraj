@@ -30,6 +30,7 @@ function SumCalculator() {
 
   return (
     <div>
+      <h1>SumCalculator</h1>
       <form onSubmit={handleSubmit}>
         <input
           type="number"
@@ -39,7 +40,7 @@ function SumCalculator() {
         />
         <button type="submit">Add</button>
       </form>
-      <div>Sum: {sum}</div>
+      <p>Sum: {sum}</p>
     </div>
   );
 }
