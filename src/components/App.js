@@ -9,18 +9,21 @@ function App() {
     e.preventDefault();
     const num = parseInt(inputValue, 10);
     if (!isNaN(num)) {
-      setNumbers((prevNumbers) => [...prevNumbers, num]);
+      setNumbers(prevNumbers => [...prevNumbers, num]);
       setInputValue('');
     }
   };
 
   useEffect(() => {
     let isMounted = true;
-    const timer = setTimeout(() => {
+    
+    const calculateSum = () => {
       const total = numbers.reduce((acc, curr) => acc + curr, 0);
       if (isMounted) setSum(total);
-    }, 0);
+    };
 
+    const timer = setTimeout(calculateSum, 0);
+    
     return () => {
       isMounted = false;
       clearTimeout(timer);
@@ -39,7 +42,9 @@ function App() {
         />
         <button type="submit">Add</button>
       </form>
-      <p>Sum: {sum}</p>
+      <div className="sum-display">
+       <p>Total Sum: <strong>{sum}</strong></p> 
+      </div>
     </div>
   );
 }
