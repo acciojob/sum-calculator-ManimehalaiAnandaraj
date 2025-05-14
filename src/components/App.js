@@ -1,37 +1,35 @@
 import React, { useState, useEffect } from 'react';
 
-const App=() => {
+function SumCalculator() {
   const [numbers, setNumbers] = useState([]);
   const [sum, setSum] = useState(0);
   const [inputValue, setInputValue] = useState('');
 
-  useEffect(() => {
-    let isMounted = true;
-    const calculateSum = async () => {
-      // Simulate asynchronous calculation to prevent UI freeze
-      await new Promise(resolve => setTimeout(resolve, 0));
-      if (isMounted) {
-        const total = numbers.reduce((acc, num) => acc + num, 0);
-        setSum(total);
-      }
-    };
-    calculateSum();
-    return () => { isMounted = false; };
-  }, [numbers]);
-
   const handleSubmit = (e) => {
     e.preventDefault();
-    const number = parseInt(inputValue, 10);
-    if (!isNaN(number)) {
-      setNumbers(prev => [...prev, number]);
+    const num = parseInt(inputValue, 10);
+    if (!isNaN(num)) {
+      setNumbers(prev => [...prev, num]);
       setInputValue('');
     }
   };
 
+  useEffect(() => {
+    let isMounted = true;
+    const timer = setTimeout(() => {
+      const total = numbers.reduce((acc, curr) => acc + curr, 0);
+      if (isMounted) {
+        setSum(total);
+      }
+    }, 0);
+    return () => {
+      isMounted = false;
+      clearTimeout(timer);
+    };
+  }, [numbers]);
+
   return (
-    <>
     <div>
-      <h3>Sum Calculator</h3>
       <form onSubmit={handleSubmit}>
         <input
           type="number"
@@ -41,10 +39,9 @@ const App=() => {
         />
         <button type="submit">Add</button>
       </form>
-      <h2>Sum: {sum}</h2>
+      <div>Sum: {sum}</div>
     </div>
-    </>
   );
 }
 
-export default App;
+export default SumCalculator;
