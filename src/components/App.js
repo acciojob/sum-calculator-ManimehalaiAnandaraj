@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-function SumCalculator() {
+function App() {
   const [numbers, setNumbers] = useState([]);
   const [sum, setSum] = useState(0);
   const [inputValue, setInputValue] = useState('');
@@ -9,7 +9,7 @@ function SumCalculator() {
     e.preventDefault();
     const num = parseInt(inputValue, 10);
     if (!isNaN(num)) {
-      setNumbers(prev => [...prev, num]);
+      setNumbers((prevNumbers) => [...prevNumbers, num]);
       setInputValue('');
     }
   };
@@ -18,10 +18,9 @@ function SumCalculator() {
     let isMounted = true;
     const timer = setTimeout(() => {
       const total = numbers.reduce((acc, curr) => acc + curr, 0);
-      if (isMounted) {
-        setSum(total);
-      }
+      if (isMounted) setSum(total);
     }, 0);
+
     return () => {
       isMounted = false;
       clearTimeout(timer);
@@ -30,7 +29,7 @@ function SumCalculator() {
 
   return (
     <div>
-      <h1>SumCalculator</h1>
+      <h1>Sum Calculator</h1>
       <form onSubmit={handleSubmit}>
         <input
           type="number"
@@ -45,4 +44,4 @@ function SumCalculator() {
   );
 }
 
-export default SumCalculator;
+export default App;
