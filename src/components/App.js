@@ -43,7 +43,7 @@ function App() {
         <button type="submit">Add</button>
       </form>
       <div className="sum-display">
-       <p>Total Sum: <strong>{sum}</strong></p> 
+       <p>Sum: <strong>{sum}</strong></p> 
       </div>
     </div>
   );
