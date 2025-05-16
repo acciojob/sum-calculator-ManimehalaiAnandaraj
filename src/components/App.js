@@ -15,19 +15,9 @@ function App() {
   };
 
   useEffect(() => {
-    let isMounted = true;
-    
-    const SumCalculator = () => {
-      const total = numbers.reduce((acc, curr) => acc + curr, 0);
-      if (isMounted) setSum(total);
-    };
-
-    const timer = setTimeout(SumCalculator, 0);
-    
-    return () => {
-      isMounted = false;
-      clearTimeout(timer);
-    };
+    // Calculate the sum whenever the numbers array changes
+    const total = numbers.reduce((acc, curr) => acc + curr, 0);
+    setSum(total);
   }, [numbers]);
 
   return (
@@ -43,7 +33,7 @@ function App() {
         <button type="submit">Add</button>
       </form>
       <div className="sum-display">
-       <p>Sum: <strong>{sum}</strong></p> 
+        <p>Sum: <strong>{sum}</strong></p> 
       </div>
     </div>
   );
