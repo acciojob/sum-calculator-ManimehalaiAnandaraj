@@ -17,12 +17,12 @@ function App() {
   useEffect(() => {
     let isMounted = true;
     
-    const calculateSum = () => {
+    const SumCalculator = () => {
       const total = numbers.reduce((acc, curr) => acc + curr, 0);
       if (isMounted) setSum(total);
     };
 
-    const timer = setTimeout(calculateSum, 0);
+    const timer = setTimeout(SumCalculator, 0);
     
     return () => {
       isMounted = false;
