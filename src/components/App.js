@@ -35,6 +35,14 @@ function App() {
         />
         <button type="submit" disabled={inputValue === '' || isNaN(parseInt(inputValue, 10))}>Add</button>
       </form>
+      <div className="number-list">
+  <h2>Entered Numbers:</h2>
+  <ul>
+    {numbers.map((number, index) => (
+      <li key={index}>{number}</li>
+    ))}
+  </ul>
+</div>
       <div className="sum-display">
         <p>Sum: <strong>{sum}</strong></p> 
       </div>
