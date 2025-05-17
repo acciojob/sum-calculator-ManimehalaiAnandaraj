@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import './../styles/App.css'
+import './../styles/App.css';
 
 function App() {
   const [numbers, setNumbers] = useState([]);
   const [sum, setSum] = useState(0);
   const [inputValue, setInputValue] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -12,16 +13,24 @@ function App() {
     if (!isNaN(num)) {
       setNumbers(prevNumbers => [...prevNumbers, num]);
       setInputValue('');
+      setErrorMessage(''); // Clear error message on successful submission
     } else {
-    alert("Please enter a valid number");
-  }
-};
+      setErrorMessage("Please enter a valid number");
+    }
+  };
 
   useEffect(() => {
     // Calculate the sum whenever the numbers array changes
     const total = numbers.reduce((acc, curr) => acc + curr, 0);
     setSum(total);
   }, [numbers]);
+
+  const handleClear = () => {
+    setNumbers([]);
+    setSum(0);
+    setInputValue('');
+    setErrorMessage('');
+  };
 
   return (
     <div>
@@ -35,17 +44,19 @@ function App() {
         />
         <button type="submit" disabled={inputValue === '' || isNaN(parseInt(inputValue, 10))}>Add</button>
       </form>
+      {errorMessage && <p style={{ color: 'red' }}>{errorMessage}</p>}
       <div className="number-list">
-  <h2>Entered Numbers:</h2>
-  <ul>
-    {numbers.map((number, index) => (
-      <li key={index}>{number}</li>
-    ))}
-  </ul>
-</div>
+        <h2>Entered Numbers:</h2>
+        <ul>
+          {numbers.map((number, index) => (
+            <li key={index}>{number}</li>
+          ))}
+        </ul>
+      </div>
       <div className="sum-display">
         <p>Sum: <strong>{sum}</strong></p> 
       </div>
+      <button onClick={handleClear}>Clear All</button>
     </div>
   );
 }
