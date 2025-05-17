@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import './../styles/App.css'
 
 function App() {
   const [numbers, setNumbers] = useState([]);
@@ -11,8 +12,11 @@ function App() {
     if (!isNaN(num)) {
       setNumbers(prevNumbers => [...prevNumbers, num]);
       setInputValue('');
-    }
-  };
+    } else {
+    // Optionally, you can alert the user or show a message
+    alert("Please enter a valid number");
+  }
+};
 
   useEffect(() => {
     // Calculate the sum whenever the numbers array changes
