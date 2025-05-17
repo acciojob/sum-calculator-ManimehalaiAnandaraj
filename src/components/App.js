@@ -13,7 +13,6 @@ function App() {
       setNumbers(prevNumbers => [...prevNumbers, num]);
       setInputValue('');
     } else {
-    // Optionally, you can alert the user or show a message
     alert("Please enter a valid number");
   }
 };
@@ -34,7 +33,7 @@ function App() {
           onChange={(e) => setInputValue(e.target.value)}
           placeholder="Enter a number"
         />
-        <button type="submit">Add</button>
+        <button type="submit" disabled={inputValue === '' || isNaN(parseInt(inputValue, 10))}>Add</button>
       </form>
       <div className="sum-display">
         <p>Sum: <strong>{sum}</strong></p> 
