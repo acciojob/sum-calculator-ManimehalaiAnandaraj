@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import './../styles/App.css';
 
 function App() {
@@ -24,7 +23,7 @@ function App() {
     // Calculate the sum whenever the numbers array changes
     const total = numbers.reduce((acc, curr) => acc + curr, 0);
     setSum(total);
-      }, [numbers]);
+  }, [numbers]);
 
   const handleClear = () => {
     setNumbers([]);
@@ -45,11 +44,17 @@ function App() {
         />
         <button type="submit" disabled={inputValue === '' || isNaN(parseInt(inputValue, 10))}>Add</button>
       </form>
-      
+
+      {/* Display error message if there's an error */}
+      {errorMessage && <p style={{ color: 'red' }}>{errorMessage}</p>}
+
       <div className="sum-display">
         <p>Sum: <strong>{sum}</strong></p> 
       </div>
-      </div>
+
+      {/* Clear button to reset the calculator */}
+      <button onClick={handleClear}>Clear All</button>
+    </div>
   );
 }
 
