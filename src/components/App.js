@@ -11,25 +11,25 @@ function App() {
     e.preventDefault();
     const num = parseInt(inputValue, 10);
     if (!isNaN(num)) {
-      setNumbers(prevNumbers => [...prevNumbers, num]);
-      setInputValue('');
-      setErrorMessage(''); // Clear error message on successful submission
+      setNumbers(prevNumbers => [...prevNumbers, num]); // Add number to the array
+      setInputValue(''); // Clear input
+      setErrorMessage(''); // Clear error message
     } else {
-      setErrorMessage("Please enter a valid number");
+      setErrorMessage("Please enter a valid number"); // Show error message
     }
   };
 
   useEffect(() => {
     // Calculate the sum whenever the numbers array changes
     const total = numbers.reduce((acc, curr) => acc + curr, 0);
-    setSum(total);
+    setSum(total); // Update the sum state
   }, [numbers]);
 
   const handleClear = () => {
-    setNumbers([]);
-    setSum(0);
-    setInputValue('');
-    setErrorMessage('');
+    setNumbers([]); // Clear numbers array
+    setSum(0); // Reset sum
+    setInputValue(''); // Clear input field
+    setErrorMessage(''); // Clear error message
   };
 
   return (
@@ -39,7 +39,7 @@ function App() {
         <input
           type="number"
           value={inputValue}
-          onChange={(e) => setInputValue(e.target.value)}
+          onChange={(e) => setInputValue(e.target.value)} // Update input value
           placeholder="Enter a number"
         />
         <button type="submit" disabled={inputValue === '' || isNaN(parseInt(inputValue, 10))}>Add</button>
