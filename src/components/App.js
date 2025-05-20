@@ -23,7 +23,9 @@ function App() {
     // Calculate the sum whenever the numbers array changes
     const total = numbers.reduce((acc, curr) => acc + curr, 0);
     setSum(total); // Update the sum state
-  }, [numbers]);
+    console.log("Current numbers:", numbers);
+    console.log("Current sum:", total); // Log the calculated total instead of the state
+  }, [numbers]); // Only depend on numbers
 
   const handleClear = () => {
     setNumbers([]); // Clear numbers array
